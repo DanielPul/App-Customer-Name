@@ -1,0 +1,54 @@
+//dart// 
+import 'package:flutter/material.dart';
+
+class LandingPage extends StatefulWidget {
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  final _formKey = GlobalKey<FormState>();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Cybersecurity Landing Page')),
+      body: Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            TextFormField(
+              decoration: InputDecoration(labelText: 'First Name'),
+              controller: _firstNameController,
+              validator: (value) => value == null || value.isEmpty ? 'Please enter first name' : null,
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Last Name'),
+              controller: _lastNameController,
+              validator: (value) => value == null || value.isEmpty ? 'Please enter last name' : null,
+            ),
+            TextFormField(
+              decoration: InputDecoration(labelText: 'Phone Number'),
+              controller: _phoneNumberController,
+              validator: (value) => value == null || value.isEmpty ? 'Please enter phone number' : null,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  // Send data to your server
+                  print('First Name: ${_firstNameController.text}');
+                  print('Last Name: ${_lastNameController.text}');
+                  print('Phone Number: ${_phoneNumberController.text}');
+                }
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
